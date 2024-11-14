@@ -112,6 +112,9 @@ public class MazeGenerator : MonoBehaviour
 
     private void ClearWalls(MazeCell previousCell, MazeCell currentCell)
     {
+        int x = ((int)currentCell.transform.position.x) / _sizeMultiplier;
+        int z = ((int)currentCell.transform.position.z) / _sizeMultiplier;
+
         if (previousCell == null)
         {
             return;
