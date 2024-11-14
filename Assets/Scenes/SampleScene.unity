@@ -513,10 +513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe6fbc6b2a57428796da341bd7fb182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalLight: {fileID: 0}
-  timer: 0
-  stalker: {fileID: 0}
-  stalkerMaterial: {fileID: 0}
 --- !u!1 &777293224
 GameObject:
   m_ObjectHideFlags: 0

@@ -113,7 +113,6 @@ public class FlashScreen : MonoBehaviour
         imageBackground.enabled = false;
         imagePlaceholder.enabled = false;
     } 
-
     
     private void Awake()
     {
