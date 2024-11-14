@@ -20,11 +20,17 @@ public class MazeCell : MonoBehaviour
     private GameObject _unvisitedBlock;
 
     public bool IsVisited { get; private set; }
+    public bool IsSpawnPointUsed { get; private set; }
 
     public void Visit()
     {
         IsVisited = true;
         _unvisitedBlock.SetActive(false);
+    }
+
+    public void SetSpawnPointUsed()
+    {
+        IsSpawnPointUsed = true;
     }
 
     public void ClearLeftWall()

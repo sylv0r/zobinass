@@ -17,9 +17,15 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private int _sizeMultiplier;
 
-    private MazeCell[,] _mazeGrid;
+    [SerializeField]
+    private int _mobCount;
 
+    [SerializeField]
+    private GameObject _mobPrefab;
+
+    private MazeCell[,] _mazeGrid;
     private int _isExitIndex;
+    private List<List<int>> _mobSpawnPoints = new List<List<int>>();
 
     void Start()
     {
@@ -37,11 +43,38 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
+        // Generate bot spawn points, push them to the list and decrement the mob count
+        for (int i = 0; i < _mobCount; i++)
+        {
+            int x = Random.Range(0, _mazeWidth);
+            int z = Random.Range(0, _mazeDepth);
+
+            if (_mazeGrid[x, z].IsSpawnPointUsed)
+            {
+                i--;
+                continue;
+            }
+
+            _mazeGrid[x, z].SetSpawnPointUsed();
+            _mobSpawnPoints.Add(new List<int> { x, z });
+        }
+
+
         GenerateMaze(null, _mazeGrid[0, 0]);
     }
 
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)
     {
+        int x = ((int)currentCell.transform.position.x) / _sizeMultiplier;
+        int z = ((int)currentCell.transform.position.z) / _sizeMultiplier;
+
+        // if the current position is in mob spawn points, remove it from the list and instantiate a mob prefab
+        if (_mobSpawnPoints.Any(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z))
+        {
+            _mobSpawnPoints.RemoveAll(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z);
+            Instantiate(_mobPrefab, new Vector3(x * _sizeMultiplier, 0, z * _sizeMultiplier), Quaternion.identity);
+        }
+
         currentCell.Visit();
         ClearWalls(previousCell, currentCell);
 
