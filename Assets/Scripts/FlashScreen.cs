@@ -9,8 +9,6 @@ public class FlashScreen : MonoBehaviour
 
     private Light directionalLight;
     private float timer;
-    private GameObject stalker;
-    private Material stalkerMaterial;
 
 
     private void Update()
@@ -27,19 +25,18 @@ public class FlashScreen : MonoBehaviour
             RenderSettings.ambientLight = Color.white;
             RenderSettings.ambientIntensity = 1f;
             directionalLight.intensity = 1f;
-            stalker.SetActive(false);
-            StartCoroutine(TakeScreenshotAndShow());
+            //StartCoroutine(TakeScreenshotAndShow());
 
             //stalkerMaterial.color = new Color(stalkerMaterial.color.r, stalkerMaterial.color.g, stalkerMaterial.color.b, Mathf.Lerp(stalkerMaterial.color.a, 0f, Time.deltaTime));
         }
         else
         {
-            RenderSettings.ambientLight = Color.black;
+       /*      RenderSettings.ambientLight = Color.black;
             RenderSettings.ambientIntensity = 0f;
             directionalLight.intensity = 0f;
             stalker.SetActive(true);
             //stalkerMaterial.color = new Color(stalkerMaterial.color.r, stalkerMaterial.color.g, stalkerMaterial.color.b, Mathf.Lerp(stalkerMaterial.color.a, 1f, Time.deltaTime));
-            StartCoroutine(DeleteScreenshot());
+            StartCoroutine(DeleteScreenshot()); */
         }   
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -77,7 +74,6 @@ public class FlashScreen : MonoBehaviour
     void Awake()
     {
         directionalLight = GameObject.Find("Directional Light").GetComponent<Light>();
-        stalker = GameObject.Find("Stalker");
     }
 }
 
