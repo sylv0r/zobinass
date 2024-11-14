@@ -19,9 +19,13 @@ public class MazeGenerator : MonoBehaviour
 
     private MazeCell[,] _mazeGrid;
 
+    private int _isExitIndex;
+
     void Start()
     {
         _mazeGrid = new MazeCell[_mazeWidth, _mazeDepth];
+
+        _isExitIndex = Random.Range(0, _mazeWidth - 1);
 
         for (int x = 0; x < _mazeWidth; x++)
         {
@@ -29,7 +33,6 @@ public class MazeGenerator : MonoBehaviour
             {
                 int vectorX = x * _sizeMultiplier;
                 int vectorZ = z * _sizeMultiplier;
-                Debug.Log(x + " " + z);
                 _mazeGrid[x, z] = Instantiate(_mazeCellPrefab, new Vector3(vectorX, 0, vectorZ), Quaternion.identity);
             }
         }
@@ -67,12 +70,10 @@ public class MazeGenerator : MonoBehaviour
         int x = ((int)currentCell.transform.position.x) / _sizeMultiplier;
         int z = ((int)currentCell.transform.position.z) / _sizeMultiplier;
 
-        Debug.Log(x + " " + z);
-
         if (x + 1 < _mazeWidth)
         {
             var cellToRight = _mazeGrid[x + 1, z];
-            
+
             if (cellToRight.IsVisited == false)
             {
                 yield return cellToRight;
@@ -114,6 +115,11 @@ public class MazeGenerator : MonoBehaviour
     {
         int x = ((int)currentCell.transform.position.x) / _sizeMultiplier;
         int z = ((int)currentCell.transform.position.z) / _sizeMultiplier;
+
+        if (x == 0 && z == _isExitIndex)
+        {
+            currentCell.ClearLeftWall();
+        }
 
         if (previousCell == null)
         {
