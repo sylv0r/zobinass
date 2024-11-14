@@ -1438,8 +1438,8 @@ MonoBehaviour:
   _mazeWidth: 20
   _mazeDepth: 20
   _sizeMultiplier: 6
-  _mobCount: 1
-  _mobPrefab: {fileID: 7290455793671352149, guid: 79afa10955e954511a8c7172f51139bf, type: 3}
+  _mobCount: 10
+  _mobPrefab: {fileID: 7290455793671352149, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
 --- !u!4 &1478520312
 Transform:
   m_ObjectHideFlags: 0
