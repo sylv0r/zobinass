@@ -15,17 +15,22 @@ public class SuvBotController : MonoBehaviour
     private Vector3 movementDirection;       // Current movement direction
     private bool isStopped = false;          // Flag to indicate if the car is stopped
 
+    public AudioSource accelerationSound;
+
     void Start()
     {
+        accelerationSound.enabled = false;
         player = GameObject.Find("Player").transform;
         // Initialize with a forward direction
         movementDirection = transform.forward;
+    
     }
 
     void Update()
     {
         if (!isStopped)
         {
+            accelerationSound.enabled = true;
             // Move the car forward
             transform.Translate(movementDirection * moveSpeed * Time.deltaTime, Space.World);
         }
@@ -33,14 +38,16 @@ public class SuvBotController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        accelerationSound.enabled = false;
+        
         // Check if the car has collided with a wall
         if (collision.gameObject.CompareTag("Wall"))
         {
             // Move the car slightly backward to prevent staying within the wall
-            transform.position -= movementDirection * collisionBackoffDistance;
+            //transform.position -= movementDirection * collisionBackoffDistance;
 
             // Log collision for debugging
-            Debug.Log("Collision detected with wall!");
+            Debug.Log("aaaa " + "Collision detected with wall!");
 
             // Stop and wait, then choose a new direction
             StartCoroutine(StopAndChooseNewDirection());
@@ -71,20 +78,26 @@ public class SuvBotController : MonoBehaviour
 
     void ChooseNewDirection()
     {
+        Debug.Log("aaaa " + "Choosing new direction");
+
+
+        Debug.Log("aaaa " + "Right");
         // Try to rotate 90 degrees to the right as a starting direction change
-        movementDirection = Quaternion.Euler(0, 90, 0) * movementDirection;
+        movementDirection = Quaternion.Euler(0, 30, 0) * movementDirection;
         transform.rotation = Quaternion.LookRotation(movementDirection);
 
         // If there's still an obstacle immediately after turning, try alternative directions
         if (IsObstacleAhead())
         {
-            movementDirection = Quaternion.Euler(0, -180, 0) * movementDirection;
+        Debug.Log("aaaa " + "Left");
+            movementDirection = Quaternion.Euler(0, -30, 0) * movementDirection;
             transform.rotation = Quaternion.LookRotation(movementDirection);
         }
 
         if (IsObstacleAhead())
         {
-            movementDirection = Quaternion.Euler(0, -90, 0) * movementDirection;
+        Debug.Log("aaaa " + "back");
+            movementDirection = Quaternion.Euler(0, -60, 0) * movementDirection;
             transform.rotation = Quaternion.LookRotation(movementDirection);
         }
     }
@@ -96,6 +109,7 @@ public class SuvBotController : MonoBehaviour
         Debug.DrawRay(raycastStart, movementDirection * 0.5f, Color.red);
 
         // Perform a raycast from a slightly offset position to check for obstacles
+        Debug.Log("aaaa " + Physics.Raycast(raycastStart, movementDirection, 0.5f));
         return Physics.Raycast(raycastStart, movementDirection, 0.5f);
     }
 }

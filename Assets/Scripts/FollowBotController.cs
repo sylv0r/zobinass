@@ -30,9 +30,6 @@ public class followBotController : MonoBehaviour
         // Calculate the direction vector from the bot to the target
         Vector3 direction = (target.position - transform.position).normalized;
         
-        Debug.Log(direction);
-        Debug.Log(Vector3.zero);
-
 
         // Ensure the direction vector is not zero
         if (direction != Vector3.zero)
