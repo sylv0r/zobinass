@@ -172,16 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d2d026ef54a6487d828bbaaf8939101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageBackground: {fileID: 0}
-  imageRectTransform: {fileID: 0}
   imagePlaceholder: {fileID: 98754010}
-  flashLight: {fileID: 0}
-  initialFlashIntensity: 14.8
-  flashDuration: 0.5
+  imageBackground: {fileID: 0}
   photoMoveDuration: 2
   photoFadeDuration: 10
   photoDisplayDuration: 100
-  audioShutter: {fileID: 0}
   audioPrintPolaroid: {fileID: 0}
 --- !u!114 &98754010
 MonoBehaviour:
@@ -1232,67 +1227,6 @@ MonoBehaviour:
   directionChangeInterval: 2
   detectionRange: 1
   rotationSpeed: 5
---- !u!1001 &1168126623
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7290455793671352149, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_Name
-      value: Free Racing Car Blue Variant (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7290455793671352149, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.44924164
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0000009536743
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 19.942911
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7955386942706185711, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1e858ed5f7f7a495db7b6bb4f4cd3f5c, type: 3}
 --- !u!1 &1208591670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,7 +1357,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1239658092}
   head: {fileID: 606773403}
-  camera: {fileID: 1360174144}
   walkSpeed: 5
   runSpeed: 10
   jumpSpeed: 5
@@ -2033,6 +1966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: drone
       objectReference: {fileID: 0}
+    - target: {fileID: 638983571794899257, guid: 765f98b83a4dc4c73add4a75a58928b9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5389172252894271140, guid: 765f98b83a4dc4c73add4a75a58928b9, type: 3}
       propertyPath: target
       value: 
@@ -2082,6 +2019,133 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 765f98b83a4dc4c73add4a75a58928b9, type: 3}
+--- !u!1001 &4432249384077810312
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.44924164
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 19.942911
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3863445791820745179, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7143780580200292232, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_Name
+      value: Free Racing Car Blue Variant (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7143780580200292232, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
+--- !u!1001 &7840004040571798667
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3234918
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.19999905
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.110905
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213796711496480400, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614737842524726474, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: velocity.x
+      value: -0.19311026
+      objectReference: {fileID: 0}
+    - target: {fileID: 3614737842524726474, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: velocity.z
+      value: 0.36160016
+      objectReference: {fileID: 0}
+    - target: {fileID: 5634771085435299877, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+      propertyPath: m_Name
+      value: Mimic
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8015743316077851210, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2105,4 +2169,5 @@ SceneRoots:
   - {fileID: 1208591672}
   - {fileID: 753386869}
   - {fileID: 1417761013}
-  - {fileID: 1168126623}
+  - {fileID: 4432249384077810312}
+  - {fileID: 7840004040571798667}

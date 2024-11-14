@@ -20,7 +20,7 @@ public class SuvBotController : MonoBehaviour
     void Start()
     {
         accelerationSound.enabled = false;
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("Player(Clone)").transform;
         // Initialize with a forward direction
         movementDirection = transform.forward;
     

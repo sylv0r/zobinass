@@ -20,6 +20,7 @@ public class RandomBotController : MonoBehaviour
 
     void Start()
     {
+        target = GameObject.Find("Player(Clone)").transform;
         ChooseNewDirection(); // Initialize with a random direction
     }
 
