@@ -24,6 +24,10 @@ public class MazeGenerator : MonoBehaviour
     private GameObject _mobPrefab;
 
     private MazeCell[,] _mazeGrid;
+
+    [SerializeField]
+    private int _lightDisappearChance;
+
     private int _isExitIndex;
     private List<List<int>> _mobSpawnPoints = new List<List<int>>();
     private List<int> _userSpawnPoint = new List<int>();
@@ -175,6 +179,12 @@ public class MazeGenerator : MonoBehaviour
         if (previousCell == null)
         {
             return;
+        }
+
+        // Remove light from the cell with a chance of _lightDisappearChance
+        if (Random.Range(0, 100) <= _lightDisappearChance)
+        {
+            currentCell.DesactivateLight();
         }
 
         if (previousCell.transform.position.x < currentCell.transform.position.x)
