@@ -23,6 +23,12 @@ public class MazeGenerator : MonoBehaviour
     [SerializeField]
     private GameObject _mobPrefab;
 
+    [SerializeField]
+    private GameObject _player;
+
+    [SerializeField]
+    private GameObject _stalker;
+
     private MazeCell[,] _mazeGrid;
 
     [SerializeField]
@@ -80,8 +86,8 @@ public class MazeGenerator : MonoBehaviour
 
     private void SpawnUser()
     {
-        var player = GameObject.Find("Player");
-        Instantiate(player, new Vector3(_userSpawnPoint[0] * _sizeMultiplier, 0, _userSpawnPoint[1] * _sizeMultiplier), Quaternion.identity);
+        Instantiate(_player, new Vector3(_userSpawnPoint[0] * _sizeMultiplier, 0, _userSpawnPoint[1] * _sizeMultiplier), Quaternion.identity);
+        Instantiate(_stalker, new Vector3(_userSpawnPoint[0] * _sizeMultiplier, 0, _userSpawnPoint[1] * _sizeMultiplier), Quaternion.identity);
     }
 
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)
