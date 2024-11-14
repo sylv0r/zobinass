@@ -26,6 +26,7 @@ public class MazeGenerator : MonoBehaviour
     private MazeCell[,] _mazeGrid;
     private int _isExitIndex;
     private List<List<int>> _mobSpawnPoints = new List<List<int>>();
+    private List<int> _userSpawnPoint = new List<int>();
 
     void Start()
     {
@@ -43,6 +44,13 @@ public class MazeGenerator : MonoBehaviour
             }
         }
 
+        GenerateMobPositions();
+        GenerateMaze(null, _mazeGrid[0, 0]);
+        SpawnUser();
+    }
+
+    private void GenerateMobPositions()
+    {
         // Generate bot spawn points, push them to the list and decrement the mob count
         for (int i = 0; i < _mobCount; i++)
         {
@@ -58,9 +66,18 @@ public class MazeGenerator : MonoBehaviour
             _mazeGrid[x, z].SetSpawnPointUsed();
             _mobSpawnPoints.Add(new List<int> { x, z });
         }
+        // Generate user spawn point that is not in mob spawn points
+        // x must be the last index and z must be random
+        do
+        {
+            _userSpawnPoint = new List<int> { _mazeWidth - 1, Random.Range(0, _mazeDepth) };
+        } while (_mobSpawnPoints.Any(spawnPoint => spawnPoint[0] == _userSpawnPoint[0] && spawnPoint[1] == _userSpawnPoint[1]));
+    }
 
-
-        GenerateMaze(null, _mazeGrid[0, 0]);
+    private void SpawnUser()
+    {
+        var player = GameObject.Find("Player");
+        Instantiate(player, new Vector3(_userSpawnPoint[0] * _sizeMultiplier, 0, _userSpawnPoint[1] * _sizeMultiplier), Quaternion.identity);
     }
 
     private void GenerateMaze(MazeCell previousCell, MazeCell currentCell)
@@ -149,6 +166,7 @@ public class MazeGenerator : MonoBehaviour
         int x = ((int)currentCell.transform.position.x) / _sizeMultiplier;
         int z = ((int)currentCell.transform.position.z) / _sizeMultiplier;
 
+        // Create an exit in the last cell 
         if (x == 0 && z == _isExitIndex)
         {
             currentCell.ClearLeftWall();
