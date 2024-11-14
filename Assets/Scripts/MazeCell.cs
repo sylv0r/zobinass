@@ -19,8 +19,16 @@ public class MazeCell : MonoBehaviour
     [SerializeField]
     private GameObject _unvisitedBlock;
 
+    [SerializeField]
+    private GameObject _light;
+
     public bool IsVisited { get; private set; }
     public bool IsSpawnPointUsed { get; private set; }
+
+    public void DesactivateLight()
+    {
+        _light.SetActive(false);
+    }
 
     public void Visit()
     {
