@@ -20,6 +20,7 @@ public class RandomBotController : MonoBehaviour
 
     void Start()
     {
+        target = GameObject.Find("Player").transform;
         ChooseNewDirection(); // Initialize with a random direction
     }
 
@@ -35,14 +36,12 @@ public class RandomBotController : MonoBehaviour
         directionChangeTimer -= Time.deltaTime;
         if (directionChangeTimer <= 0 && Vector3.Distance(transform.position, target.position) > 5.0f)
         {
-            Debug.Log("Changing direction");
             ChooseNewDirection();
         }
 
         // If target is nearby, move towards it
         if (target != null && Vector3.Distance(transform.position, target.position) < 5.0f)
         {
-            Debug.Log("Target is nearby");
             MoveTowardsTarget();
         }
 
