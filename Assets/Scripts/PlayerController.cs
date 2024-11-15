@@ -130,7 +130,6 @@ public class PlayerController : MonoBehaviour {
 
     //  Add your fall damage code here!
     void OnFallDamage() {
-        Debug.Log("Ouch!");
     }
 
 
