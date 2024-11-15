@@ -24,6 +24,7 @@ namespace MimicSpace
 
         private void Start()
         {
+            endSound.enabled = false;
             target = GameObject.Find("Player(Clone)").transform;
             myMimic = GetComponent<Mimic>();
             ChooseRandomDirection();
