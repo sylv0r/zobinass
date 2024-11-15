@@ -6,9 +6,19 @@ using UnityEngine.SceneManagement;
 
 public class LooseMenu : MonoBehaviour
 {
+
+    [SerializeField] private string game;
+    [SerializeField] private string menu;
+
+
     public void StartGame()
     {
-        SceneManager.LoadScene("Bot");
+        SceneManager.LoadScene(game);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(menu);
     }
 
     public void Start()
