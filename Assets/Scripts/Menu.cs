@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+
+    [SerializeField] private string scene;
+
     public void StartGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(scene);
     }
 }

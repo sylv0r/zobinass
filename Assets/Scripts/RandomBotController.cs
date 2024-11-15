@@ -6,22 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class RandomBotController : MonoBehaviour
 {
-    public Transform target; // Target for the bot to follow
+    public Transform target;
 
-    public float moveSpeed = 2.0f; // Speed of the bot
-    public float directionChangeInterval = 2.0f; // How often the bot changes direction
-    public float detectionRange = 1.0f; // Range for wall detection
-    public float rotationSpeed = 5.0f; // Rotation speed toward the target
+    public float moveSpeed = 2.0f;
+    public float directionChangeInterval = 2.0f;
+    public float detectionRange = 1.0f;
+    public float rotationSpeed = 5.0f;
     private float lookTimer = 0.0f;
 
 
-    private Vector3 movementDirection; // Current movement direction
-    private float directionChangeTimer; // Timer to control direction change
+    private Vector3 movementDirection; 
+    private float directionChangeTimer;
 
     void Start()
     {
         target = GameObject.Find("Player(Clone)").transform;
-        ChooseNewDirection(); // Initialize with a random direction
+        ChooseNewDirection();
     }
 
     void Update()
@@ -53,43 +53,45 @@ public class RandomBotController : MonoBehaviour
 
     void MoveTowardsTarget()
     {
-        // Calculate the direction vector from the bot to the target
-        Vector3 direction = (target.position - transform.position).normalized;
-        
+        if(!IsObstacleAhead()) {
+            // Calculate the direction vector from the bot to the target
+            Vector3 direction = (target.position - transform.position).normalized;
+            
 
-        // Ensure the direction vector is not zero
-        if (direction != Vector3.zero)
-        {
-            // Move the bot forward in the direction of the target
-            transform.position += direction * moveSpeed * Time.deltaTime;
-
-            // Smoothly rotate the bot to face the target
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-
-        // if bot touches the target, go to scene Loose
-        if (Vector3.Distance(transform.position, target.position) < 1.0f)
-        {
-            SceneManager.LoadScene("Loose");
-        }
-
-        // Check if the player is looking at the bot
-        if (IsPlayerLookingAtBot())
-        {
-            // Increment the timer
-            lookTimer += Time.deltaTime;
-
-            // If the player has been looking at the bot for more than 10 seconds, destroy the bot
-            if (lookTimer > 10.0f)
+            // Ensure the direction vector is not zero
+            if (direction != Vector3.zero)
             {
-            Destroy(gameObject);
+                // Move the bot forward in the direction of the target
+                transform.position += direction * moveSpeed * Time.deltaTime;
+
+                // Smoothly rotate the bot to face the target
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
-        }
-        else
-        {
-            // Reset the timer if the player is not looking at the bot
-            lookTimer = 0.0f;
+
+            // if bot touches the target, go to scene Loose
+            if (Vector3.Distance(transform.position, target.position) < 1.0f)
+            {
+                SceneManager.LoadScene("Loose");
+            }
+
+            // Check if the player is looking at the bot
+            if (IsPlayerLookingAtBot())
+            {
+                // Increment the timer
+                lookTimer += Time.deltaTime;
+
+                // If the player has been looking at the bot for more than 10 seconds, destroy the bot
+                if (lookTimer > 10.0f)
+                {
+                Destroy(gameObject);
+                }
+            }
+            else
+            {
+                // Reset the timer if the player is not looking at the bot
+                lookTimer = 0.0f;
+            }
         }
     }
 
@@ -98,8 +100,6 @@ public class RandomBotController : MonoBehaviour
     {
         Vector3 directionToBot = (transform.position - target.position).normalized;
         float dotProduct = Vector3.Dot(target.forward, directionToBot);
-
-        // Check if the dot product is greater than a threshold (e.g., 0.9 for a narrow field of view)
         return dotProduct > 0.9f;
     }
     
