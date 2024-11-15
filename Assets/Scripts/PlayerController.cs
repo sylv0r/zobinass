@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Audio")]
     public AudioSource audioWalk;
-    public AudioSource audioHitWall;
 
     // Start is called before the first frame update
     void Start() {
@@ -65,9 +64,7 @@ public class PlayerController : MonoBehaviour {
 
         if (isTouchingWall && isMovingOnGround) {
             audioWalk.enabled = false;
-        }
-        audioHitWall.enabled = isTouchingWall && isMovingOnGround;
-        
+        }        
     }
 
     void FixedUpdate() {
