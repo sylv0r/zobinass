@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 
 public class RandomBotController : MonoBehaviour
@@ -20,14 +20,15 @@ public class RandomBotController : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.Find("Player").transform;
+        target = GameObject.Find("Player(Clone)").transform;
         ChooseNewDirection(); // Initialize with a random direction
     }
 
     void Update()
     {
         // Move in the current direction
-        if (Vector3.Distance(transform.position, target.position) > 5.0f) {
+        if (Vector3.Distance(transform.position, target.position) > 5.0f)
+        {
             MoveInDirection();
         }
 
@@ -53,7 +54,7 @@ public class RandomBotController : MonoBehaviour
     {
         // Calculate the direction vector from the bot to the target
         Vector3 direction = (target.position - transform.position).normalized;
-        
+
 
         // Ensure the direction vector is not zero
         if (direction != Vector3.zero)
@@ -81,7 +82,7 @@ public class RandomBotController : MonoBehaviour
             // If the player has been looking at the bot for more than 10 seconds, destroy the bot
             if (lookTimer > 10.0f)
             {
-            Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
         else
@@ -100,7 +101,7 @@ public class RandomBotController : MonoBehaviour
         // Check if the dot product is greater than a threshold (e.g., 0.9 for a narrow field of view)
         return dotProduct > 0.9f;
     }
-    
+
 
     void MoveInDirection()
     {
@@ -131,7 +132,7 @@ public class RandomBotController : MonoBehaviour
         // Choose a new random direction in the XZ plane (ignoring Y for flat ground movement)
         float randomAngle = Random.Range(0f, 360f);
         movementDirection = new Vector3(Mathf.Cos(randomAngle), 0, Mathf.Sin(randomAngle)).normalized;
-        
+
         // Rotate the bot to face the new direction
         transform.rotation = Quaternion.LookRotation(movementDirection);
     }
