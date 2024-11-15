@@ -4,8 +4,8 @@ using System.Collections;
 public class StalkerCamera: MonoBehaviour
 {
     [Header("References")]
-    public Transform target;
-    public FlashScreen flashScreen;
+    private Transform target;
+    private FlashScreen flashScreen;
  
     [Header("Audio")]
     public AudioSource audioShutter;
@@ -24,6 +24,8 @@ public class StalkerCamera: MonoBehaviour
     
     private void Start()
     {
+        target = GameObject.Find("Player(Clone)").transform;
+        flashScreen = GameObject.Find("ShowScreenshotHolder").GetComponent<FlashScreen>();
         _camera = GetComponent<Camera>();
         _light = GetComponent<Light>();
     }

@@ -262,14 +262,14 @@ MonoBehaviour:
   _mazeWidth: 10
   _mazeDepth: 10
   _sizeMultiplier: 6
-  _player: {fileID: 605674872332156361, guid: 5a6ea5bac390a4748b60c0dab1fea855, type: 3}
-  _stalker: {fileID: 546528171129208065, guid: 8921a85452b864581a30c4be2ad80273, type: 3}
+  _player: {fileID: 938579514823067394, guid: 5a6ea5bac390a4748b60c0dab1fea855, type: 3}
+  _stalker: {fileID: 8015969037152925086, guid: 8921a85452b864581a30c4be2ad80273, type: 3}
   _lightDisappearChance: 50
-  _droneCount: 10
+  _droneCount: 5
   _dronePrefab: {fileID: 638983571794899257, guid: 765f98b83a4dc4c73add4a75a58928b9, type: 3}
-  _carCount: 10
+  _carCount: 5
   _carPrefab: {fileID: 7143780580200292232, guid: 5e21b6a40d79c4855bda1d2959a3cf60, type: 3}
-  _mimicCount: 10
+  _mimicCount: 5
   _mimicPrefab: {fileID: 5634771085435299877, guid: 157ecaf1230eb49da96af51c64e82c99, type: 3}
 --- !u!4 &1155491989
 Transform:

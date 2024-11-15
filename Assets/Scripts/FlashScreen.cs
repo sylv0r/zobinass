@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class FlashScreen : MonoBehaviour
 {
-    [SerializeField] private Image imagePlaceholder;
-    [SerializeField] private Image imageBackground;
+    private Image imagePlaceholder;
+    private Image imageBackground;
     [SerializeField] private float photoMoveDuration = 2f;
     [SerializeField] private float photoFadeDuration = 10f;
     [SerializeField] private float photoDisplayDuration = 10f;
@@ -18,6 +18,8 @@ public class FlashScreen : MonoBehaviour
     
     private void Start()
     {
+        imagePlaceholder =  GameObject.Find("ShowScreenshot").GetComponent<Image>();
+        imageBackground = GameObject.Find("ShowScreenshotBackground").GetComponent<Image>();
         _imageRectTransform = GetComponent<RectTransform>();
         _imageBackground = GetComponent<Image>();
         DeleteScreenshot();
