@@ -6,7 +6,6 @@ public class SuvBotController : MonoBehaviour
 {
     public Transform player;
 
-
     public float moveSpeed = 2.0f;
     public float rotationSpeed = 5.0f;
     public float stopDuration = 5.0f;
@@ -49,7 +48,7 @@ public class SuvBotController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         accelerationSound.enabled = false;
-
+        
         if (collision.gameObject.CompareTag("Wall"))
         {
             StartCoroutine(StopAndChooseNewDirection());
