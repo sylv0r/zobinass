@@ -11,9 +11,11 @@ public class SuvBotController : MonoBehaviour
     public float rotationSpeed = 5.0f;
     public float stopDuration = 5.0f;
     public float collisionBackoffDistance = 0.1f;
+    public AudioSource endSound;
 
     private Vector3 movementDirection;
     private bool isStopped = false;
+
 
     public AudioSource accelerationSound;
 
@@ -22,7 +24,7 @@ public class SuvBotController : MonoBehaviour
         accelerationSound.enabled = false;
         player = GameObject.Find("Player(Clone)").transform;
         movementDirection = transform.forward;
-    
+
     }
 
     void Update()
@@ -34,10 +36,19 @@ public class SuvBotController : MonoBehaviour
         }
     }
 
+    IEnumerator HandleEnd()
+    {
+        endSound.enabled = true;
+        player.LookAt(transform);
+        player.GetComponent<PlayerController>().enabled = false;
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Loose");
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         accelerationSound.enabled = false;
-        
+
         if (collision.gameObject.CompareTag("Wall"))
         {
             StartCoroutine(StopAndChooseNewDirection());
@@ -45,7 +56,7 @@ public class SuvBotController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Loose");
+            StartCoroutine(HandleEnd());
         }
     }
 
