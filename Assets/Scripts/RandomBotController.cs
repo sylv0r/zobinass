@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; 
+using UnityEngine.SceneManagement;
 
 
 public class RandomBotController : MonoBehaviour
@@ -13,13 +13,15 @@ public class RandomBotController : MonoBehaviour
     public float detectionRange = 1.0f;
     public float rotationSpeed = 5.0f;
     private float lookTimer = 0.0f;
+    public AudioSource endSound;
 
 
-    private Vector3 movementDirection; 
+    private Vector3 movementDirection;
     private float directionChangeTimer;
 
     void Start()
     {
+        endSound.enabled = false;
         target = GameObject.Find("Player(Clone)").transform;
         ChooseNewDirection();
     }
@@ -27,7 +29,8 @@ public class RandomBotController : MonoBehaviour
     void Update()
     {
         // Move in the current direction
-        if (Vector3.Distance(transform.position, target.position) > 5.0f) {
+        if (Vector3.Distance(transform.position, target.position) > 5.0f)
+        {
             MoveInDirection();
         }
 
@@ -36,27 +39,33 @@ public class RandomBotController : MonoBehaviour
         directionChangeTimer -= Time.deltaTime;
         if (directionChangeTimer <= 0 && Vector3.Distance(transform.position, target.position) > 5.0f)
         {
-            Debug.Log("Changing direction");
             ChooseNewDirection();
         }
 
         // If target is nearby, move towards it
         if (target != null && Vector3.Distance(transform.position, target.position) < 5.0f)
         {
-            Debug.Log("Target is nearby");
             MoveTowardsTarget();
         }
+    }
 
-
+    IEnumerator HandleEnd()
+    {
+        endSound.enabled = true;
+        target.LookAt(transform);
+        target.GetComponent<PlayerController>().enabled = false;
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Loose");
     }
 
 
     void MoveTowardsTarget()
     {
-        if(!IsObstacleAhead()) {
+        if (!IsObstacleAhead())
+        {
             // Calculate the direction vector from the bot to the target
             Vector3 direction = (target.position - transform.position).normalized;
-            
+
 
             // Ensure the direction vector is not zero
             if (direction != Vector3.zero)
@@ -72,7 +81,7 @@ public class RandomBotController : MonoBehaviour
             // if bot touches the target, go to scene Loose
             if (Vector3.Distance(transform.position, target.position) < 1.0f)
             {
-                SceneManager.LoadScene("Loose");
+                StartCoroutine(HandleEnd());
             }
 
             // Check if the player is looking at the bot
@@ -84,7 +93,7 @@ public class RandomBotController : MonoBehaviour
                 // If the player has been looking at the bot for more than 10 seconds, destroy the bot
                 if (lookTimer > 10.0f)
                 {
-                Destroy(gameObject);
+                    Destroy(gameObject);
                 }
             }
             else
@@ -102,7 +111,7 @@ public class RandomBotController : MonoBehaviour
         float dotProduct = Vector3.Dot(target.forward, directionToBot);
         return dotProduct > 0.9f;
     }
-    
+
 
     void MoveInDirection()
     {
@@ -133,7 +142,7 @@ public class RandomBotController : MonoBehaviour
         // Choose a new random direction in the XZ plane (ignoring Y for flat ground movement)
         float randomAngle = Random.Range(0f, 360f);
         movementDirection = new Vector3(Mathf.Cos(randomAngle), 0, Mathf.Sin(randomAngle)).normalized;
-        
+
         // Rotate the bot to face the new direction
         transform.rotation = Quaternion.LookRotation(movementDirection);
     }

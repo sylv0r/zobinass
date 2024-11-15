@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MazeCell : MonoBehaviour
 {
+    [Header("Walls")]
     [SerializeField]
     private GameObject _leftWall;
 
@@ -59,5 +60,10 @@ public class MazeCell : MonoBehaviour
     public void ClearBackWall()
     {
         _backWall.SetActive(false);
+    }
+
+    public void ChangeLightToGreen()
+    {
+        _light.GetComponent<Light>().color = Color.green;
     }
 }

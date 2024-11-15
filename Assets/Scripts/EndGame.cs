@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class EndGame : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private GameObject endZone;
+    private GameObject player;
 
     private void Start()
     {
+        player = GameObject.Find("Player(Clone)");
         // Ensure the endZone is enabled at the start (optional)
         if (endZone != null)
         {

@@ -9,6 +9,9 @@ public class MazeGenerator : MonoBehaviour
     private MazeCell _mazeCellPrefab;
 
     [SerializeField]
+    private GameObject _endZonePrefab;
+
+    [SerializeField]
     private int _mazeWidth;
 
     [SerializeField]
@@ -16,12 +19,6 @@ public class MazeGenerator : MonoBehaviour
 
     [SerializeField]
     private int _sizeMultiplier;
-
-    [SerializeField]
-    private int _mobCount;
-
-    [SerializeField]
-    private GameObject _mobPrefab;
 
     [SerializeField]
     private GameObject _player;
@@ -33,6 +30,20 @@ public class MazeGenerator : MonoBehaviour
 
     [SerializeField]
     private int _lightDisappearChance;
+
+    [Header("Mob")]
+    [SerializeField]
+    private int _droneCount;
+    [SerializeField]
+    private GameObject _dronePrefab;
+    [SerializeField]
+    private int _carCount;
+    [SerializeField]
+    private GameObject _carPrefab;
+    [SerializeField]
+    private int _mimicCount;
+    [SerializeField]
+    private GameObject _mimicPrefab;
 
     private int _isExitIndex;
     private List<List<int>> _mobSpawnPoints = new List<List<int>>();
@@ -61,8 +72,9 @@ public class MazeGenerator : MonoBehaviour
 
     private void GenerateMobPositions()
     {
+        int totalMobCount = _droneCount + _carCount + _mimicCount;
         // Generate bot spawn points, push them to the list and decrement the mob count
-        for (int i = 0; i < _mobCount; i++)
+        for (int i = 0; i < totalMobCount; i++)
         {
             int x = Random.Range(0, _mazeWidth);
             int z = Random.Range(0, _mazeDepth);
@@ -96,10 +108,23 @@ public class MazeGenerator : MonoBehaviour
         int z = ((int)currentCell.transform.position.z) / _sizeMultiplier;
 
         // if the current position is in mob spawn points, remove it from the list and instantiate a mob prefab
-        if (_mobSpawnPoints.Any(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z))
+        if (_mobSpawnPoints.Any(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z) && _droneCount > 0)
         {
             _mobSpawnPoints.RemoveAll(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z);
-            Instantiate(_mobPrefab, new Vector3(x * _sizeMultiplier, 0, z * _sizeMultiplier), Quaternion.identity);
+            Instantiate(_dronePrefab, new Vector3(x * _sizeMultiplier, 0, z * _sizeMultiplier), Quaternion.identity);
+            _droneCount--;
+        }
+        else if (_mobSpawnPoints.Any(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z) && _carCount > 0)
+        {
+            _mobSpawnPoints.RemoveAll(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z);
+            Instantiate(_carPrefab, new Vector3(x * _sizeMultiplier, 0, z * _sizeMultiplier), Quaternion.identity);
+            _carCount--;
+        }
+        else if (_mobSpawnPoints.Any(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z) && _mimicCount > 0)
+        {
+            _mobSpawnPoints.RemoveAll(spawnPoint => spawnPoint[0] == x && spawnPoint[1] == z);
+            Instantiate(_mimicPrefab, new Vector3(x * _sizeMultiplier, 0, z * _sizeMultiplier), Quaternion.identity);
+            _mimicCount--;
         }
 
         currentCell.Visit();
@@ -175,11 +200,14 @@ public class MazeGenerator : MonoBehaviour
     {
         int x = ((int)currentCell.transform.position.x) / _sizeMultiplier;
         int z = ((int)currentCell.transform.position.z) / _sizeMultiplier;
+        bool isExit = x == 0 && z == _isExitIndex;
 
         // Create an exit in the last cell 
-        if (x == 0 && z == _isExitIndex)
+        if (isExit)
         {
             currentCell.ClearLeftWall();
+            currentCell.ChangeLightToGreen();
+            Instantiate(_endZonePrefab, new Vector3((x - 1) * _sizeMultiplier, 0, z * _sizeMultiplier), Quaternion.identity);
         }
 
         if (previousCell == null)
@@ -188,7 +216,7 @@ public class MazeGenerator : MonoBehaviour
         }
 
         // Remove light from the cell with a chance of _lightDisappearChance
-        if (Random.Range(0, 100) <= _lightDisappearChance)
+        if (Random.Range(0, 100) <= _lightDisappearChance && !isExit)
         {
             currentCell.DesactivateLight();
         }

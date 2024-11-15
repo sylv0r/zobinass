@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,7 @@ namespace MimicSpace
         public float directionChangeInterval = 2.0f;
         public float obstacleDetectionRange = 1.0f;
         public float velocityLerpCoef = 4f;
+        public AudioSource endSound;
 
         private Vector3 velocity = Vector3.zero;
         private Mimic myMimic;
@@ -22,6 +24,7 @@ namespace MimicSpace
 
         private void Start()
         {
+            endSound.enabled = false;
             target = GameObject.Find("Player(Clone)").transform;
             myMimic = GetComponent<Mimic>();
             ChooseRandomDirection();
@@ -47,11 +50,20 @@ namespace MimicSpace
                 destHeight = new Vector3(transform.position.x, hit.point.y + height, transform.position.z);
             transform.position = Vector3.Lerp(transform.position, destHeight, velocityLerpCoef * Time.deltaTime);
 
-                        // if bot touches the target, go to scene Loose
+            // if bot touches the target, go to scene Loose
             if (Vector3.Distance(transform.position, target.position) < 1.0f)
             {
-                SceneManager.LoadScene("Loose");
+                StartCoroutine(HandleEnd());
             }
+        }
+
+        IEnumerator HandleEnd()
+        {
+            endSound.enabled = true;
+            target.LookAt(transform);
+            target.GetComponent<PlayerController>().enabled = false;
+            yield return new WaitForSeconds(5);
+            SceneManager.LoadScene("Loose");
         }
 
         bool IsObstacleAhead()
@@ -63,7 +75,7 @@ namespace MimicSpace
             {
                 if (hit.collider.CompareTag("Player"))
                 {
-                    SceneManager.LoadScene("Loose");
+                    StartCoroutine(HandleEnd());
                     return true;
                 }
                 return true;
