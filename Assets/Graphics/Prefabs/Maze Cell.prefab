@@ -56,6 +56,7 @@ MonoBehaviour:
   _backWall: {fileID: 8364410290003918860}
   _unvisitedBlock: {fileID: 4338973220940515475}
   _light: {fileID: 4108746798349707381}
+  _endZone: {fileID: 0}
 --- !u!1 &1072630952276839418
 GameObject:
   m_ObjectHideFlags: 0
